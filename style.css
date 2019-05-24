@@ -16,9 +16,25 @@ body {
 
 h1 {
     text-align: center;
-    margin: 1em;
+    margin: .6em;
     color: #fff;
     font-size: 3.4rem;
+}
+
+.jumbotron {
+    text-align: center;
+    margin: .1em;
+    color: #1aed21;
+    font-size: 2rem;
+}
+
+.player {
+    margin-left: 2em;
+    padding: .2em .6em;
+    color: #fff;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    width: fit-content;
 }
 
 .board-container {
@@ -39,6 +55,7 @@ h1 {
     align-items: center;
     font-size: 3rem;
     cursor: pointer;
+    color: #fff;
 }
 
 .cell:hover {
@@ -63,3 +80,6 @@ h1 {
     border-left: 5px solid #fff;
 }
 
+.winner {
+    color: #1aed21;
+}
