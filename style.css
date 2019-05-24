@@ -1,0 +1,65 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-family: 'Roboto Mono', monospace;
+}
+
+body {
+    background: #000428 fixed;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to top, #004e92, #000428) fixed;
+    background: linear-gradient(to top, #004e92, #000428) fixed;
+}
+
+h1 {
+    text-align: center;
+    margin: 1em;
+    color: #fff;
+    font-size: 3.4rem;
+}
+
+.board-container {
+    margin-left: 3em;
+    margin-right: 3em;
+    display: grid;
+    grid-template-columns: repeat(3, 225px);
+    grid-template-rows: repeat(3, 225px);
+    justify-content: center;
+    align-content: center;
+}
+
+.cell {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    cursor: pointer;
+}
+
+.cell:hover {
+    background-color: rgba(255, 255, 255, .3);
+}
+
+.cell1,
+.cell2,
+.cell3,
+.cell4,
+.cell5,
+.cell6 {
+    border-bottom: 5px solid #fff;
+}
+
+.cell2,
+.cell3,
+.cell5,
+.cell6,
+.cell8,
+.cell9 {
+    border-left: 5px solid #fff;
+}
+
