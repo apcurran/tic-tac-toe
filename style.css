@@ -28,13 +28,39 @@ h1 {
     font-size: 2rem;
 }
 
+.info {
+    display: flex;
+    justify-content: space-around;
+}
+
+.info div {
+    margin-left: 12em;
+    margin-right: 12em;
+}
+
 .player {
-    margin-left: 2em;
     padding: .2em .6em;
     color: #fff;
     border: 2px solid #fff;
     border-radius: 5px;
     width: fit-content;
+}
+
+.info .reset {
+    padding: .6em 2em;
+    outline: none;
+    border: 2px solid #fff;
+    border-radius: 5px;
+    background-color: rgba(242, 68, 33, .75);
+    color: #fff;
+    font-size: 1.3rem;
+    cursor: pointer;
+
+    transition: background-color 200ms ease-in-out;
+}
+
+.info .reset:hover {
+    background-color: rgba(242, 68, 33, 1);
 }
 
 .board-container {
