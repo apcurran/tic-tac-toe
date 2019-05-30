@@ -2,16 +2,6 @@ const gameBoard = document.querySelector(".board-container");
 const cells = Array.from(document.querySelectorAll(".cell"));
 const jumbotron = document.querySelector(".jumbotron");
 const resetBtn = document.querySelector(".reset");
-const winningCombinations = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [6, 4, 2],
-];
 
 const PlayerFactory = (name, marker, hasTurn) => {
     const sayHi = () => {
@@ -57,54 +47,74 @@ const disableClickability = () => {
 
 const clickFunc = (event) => {
     // First, check if the spot is taken yet.
-    // const selectedCell = 
-    if (event.target.textContent !== "X" && "O") {
+    if (event.target.textContent === "") {
         if (playerOne.hasTurn) {
             // Place marker in designated cell, then switch turns.
             event.target.textContent = playerOne.marker;
+            if (checkForWinner(playerOne.marker)) {
+                playerOne.displayWinner();
+                disableClickability();
+                return;
+            }
             playerOne.hasTurn = false;
             playerTwo.hasTurn = true;
             playerTwo.displayTurn();
         } else {
             // Place marker in designated cell, then switch turns.
             event.target.textContent = playerTwo.marker;
+            if (checkForWinner(playerTwo.marker)) {
+                playerTwo.displayWinner();
+                disableClickability();
+                return;
+            }
             playerTwo.hasTurn = false;
             playerOne.hasTurn = true;
             playerOne.displayTurn();
         }
+    } else {
+        jumbotron.textContent = "Sorry, that space is already taken.";
     }
-    checkForWinner();
 };
 
-const allSame = (arr) => {
-    // Return true if this passes and all elements in a row, col, or diag are the same.
-    arr.every((cellElement) => {
-        cellElement.textContent === arr[0].textContent && cellElement.textContent !== "";
-    });
-};
-
-const endGame = (winningCombo) => {
-    winningCombo.forEach(comboElement => {
-        comboElement.classList.add("winner");
-        disableClickability();
-    });
-};
-
-/* const checkForWinner = () => {
-    let winner = false;
-
-    winningCombinations.forEach((combo) => {
-        const currentBoard = cells;
-        console.log(currentBoard[8]);
-        const sequence = [ currentBoard[combo[0]], currentBoard[combo[1]], currentBoard[combo[2]] ];
-        if (allSame(sequence)) {
-            winner = true;
-            endGame(sequence);
+const checkForWinner = (playerMarker) => {
+    let result = false;
+    if  (checkForTriple(0, 1, 2, playerMarker) ||
+         checkForTriple(3, 4, 5, playerMarker) ||
+         checkForTriple(6, 7, 8, playerMarker) ||
+         checkForTriple(0, 3, 6, playerMarker) ||
+         checkForTriple(1, 4, 7, playerMarker) ||
+         checkForTriple(2, 5, 8, playerMarker) ||
+         checkForTriple(0, 4, 8, playerMarker) ||
+         checkForTriple(6, 4, 2, playerMarker)) {
+            result = true;
+            console.log("Winner!");
         }
-    });
-}; */
+    return result;
 
-enableClickability();
+};
+
+const checkForTriple = (a, b, c, playerMarker) => {
+    let result = false;
+    if (getBoxVal(a) === playerMarker && getBoxVal(b) === playerMarker && getBoxVal(c) === playerMarker) {
+        result = true;
+        // Add the winner class to highlight winning combo.
+        getBox(a).classList.add("winner");
+        getBox(b).classList.add("winner");
+        getBox(c).classList.add("winner");
+    }
+    
+    return result;
+};
+
+// Get the value of the given square.
+const getBoxVal = (number) => {
+    return document.getElementById(number).textContent;
+};
+
+// Get box to then use for adding the winner class.
+const getBox = (number) => {
+    return document.getElementById(number);
+}
 
 const resetBoard = (event) => {
     if (window.confirm("Are you sure you want to reset your game?")) {
@@ -119,3 +129,5 @@ const resetBoard = (event) => {
 };
 
 resetBtn.addEventListener("click", resetBoard);
+
+enableClickability();
