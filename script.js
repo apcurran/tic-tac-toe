@@ -31,14 +31,12 @@ const playerTwo = PlayerFactory("Player Two", "O", false);
 // Start with Player One's turn
 playerOne.displayTurn();
 
-// Enable clicks
 const enableClickability = () => {
     cells.forEach((cell) => {
         cell.addEventListener("click", clickFunc)
     });
 };
 
-// Disable clicks
 const disableClickability = () => {
     cells.forEach((cell) => {
         cell.removeEventListener("click", clickFunc)
@@ -87,7 +85,6 @@ const checkForWinner = (playerMarker) => {
          checkForTriple(0, 4, 8, playerMarker) ||
          checkForTriple(6, 4, 2, playerMarker)) {
             result = true;
-            console.log("Winner!");
         }
     return result;
 
@@ -111,7 +108,7 @@ const getBoxVal = (number) => {
     return document.getElementById(number).textContent;
 };
 
-// Get box to then use for adding the winner class.
+// Get box to then use later for adding the winner class.
 const getBox = (number) => {
     return document.getElementById(number);
 }
@@ -125,9 +122,9 @@ const resetBoard = (event) => {
 
         playerOne.hasTurn = true;
         playerOne.displayTurn();
+        enableClickability();
     }
 };
 
 resetBtn.addEventListener("click", resetBoard);
-
 enableClickability();
