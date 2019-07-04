@@ -33,17 +33,17 @@ playerOne.displayTurn();
 
 const enableClickability = () => {
     cells.forEach((cell) => {
-        cell.addEventListener("click", clickFunc)
+        cell.addEventListener("click", takeTurn)
     });
 };
 
 const disableClickability = () => {
     cells.forEach((cell) => {
-        cell.removeEventListener("click", clickFunc)
+        cell.removeEventListener("click", takeTurn)
     });
 };
 
-const clickFunc = (event) => {
+const takeTurn = (event) => {
     // First, check if the spot is taken yet.
     if (event.target.textContent === "") {
         if (playerOne.hasTurn) {
